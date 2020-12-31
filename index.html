@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Welcome to Etch-a-Sketch</title>
+<style>
+	.center {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 800px;
+		flex-direction: column;
+	}
+	#gridContainer {
+		display: grid;
+  		grid-template-columns: repeat(var(--grid-rows), 1fr);
+  		grid-template-rows: repeat(var(--grid-cols), 1fr);
+  		background-color: #2196F3;
+  		padding: 10px;
+  		height: 700px;
+  		width: 40%;
+	}
+	.gridItems {
+  		background-color: white;
+  		border: 1px solid rgba(240, 248, 255);
+		padding: 2px;
+	}
+	.gridItems:hover{
+		background: red;
+
+	}
+</style>
+</head>
+
+<body>
+<div class="center">
+<h1>Etch a sketch bruh</h1>
+<div id="gridContainer" class="gridContainers">
+
+</div>
+</div>
+</body>
+
+</html> 
+
+
+<script type="text/javascript">
+/*	
+	const gridContainer = document.querySelector("#gridContainer");
+	for(let i = 0; i < 64; i++ ) {
+		const gridItems = document.createElement('gridItems');
+		gridItems.classList.add("gridItems")
+		gridContainer.appendChild(gridItems);
+} */
+	const gridContainer = document.getElementById("gridContainer");
+
+	function makeGrids(rows, cols){
+		gridContainer.style.setProperty('--grid-rows', rows);
+		gridContainer.style.setProperty('--grid-cols', cols);
+		for (let i = 0; i < (rows * cols); i++){
+			let grids = document.createElement("div");
+			gridContainer.appendChild(grids).className = "gridItems"
+		}
+		
+	}
+
+let hoverFunction =	function(){
+				this.setAttribute("style" , "background-color: black;");
+	}
+
+makeGrids(80,80);
+
+let gridVar = document.getElementsByClassName("gridItems")
+
+for (let i = 0; i < gridVar.length; i++){
+	gridVar[i].addEventListener('mouseover', hoverFunction, false);
+}
+
+
+
+</script>
