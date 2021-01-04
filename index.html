@@ -15,7 +15,7 @@
 		display: grid;
   		grid-template-columns: repeat(var(--grid-rows), 1fr);
   		grid-template-rows: repeat(var(--grid-cols), 1fr);
-  		background-color: #2196F3;
+  		background-color: #99bbff;
   		padding: 10px;
   		height: 700px;
   		width: 40%;
@@ -29,15 +29,54 @@
 		background: red;
 
 	}
+
+	#clearBtn {
+		padding: 5px;
+		margin-top: 10px;
+	}
+
+	.slider{
+		-webkit-appearance: none;
+		width: 25%;
+		height: 12px;
+		border-radius: 5px;
+		background: #d3d3d3;
+		outline: none;
+		opacity: 0.7;
+		-webkit-transition: .2s;
+		transition: opacity .2s;
+	}
+
+	.slider:hover {
+		opacity: 1;
+	}
+
+	.slider::-webkit-slider-thumb {
+	  -webkit-appearance: none;
+	  appearance: none;
+	  width: 25px;
+	  height: 25px;
+	  border-radius: 50%;
+	  background: #99bbff;
+	  cursor: pointer;
+	}
+
+
 </style>
 </head>
 
 <body>
+<div>
+	<input type="range" class ="slider" id ="rangeInput" min="1" max="100" value="50" oninput="amount.value=rangeInput.value" onchange="twoCalls(this.value)">
+	<output id="amount" for="rangeInput">50</output>
+</div>
 <div class="center">
 <h1>Etch a sketch bruh</h1>
-<div id="gridContainer" class="gridContainers">
-
-</div>
+	<div id="gridContainer" class="gridContainers">
+	</div>
+	<div>
+	<button id="clearBtn">Clear</button>
+	</div>
 </div>
 </body>
 
@@ -61,20 +100,45 @@
 			let grids = document.createElement("div");
 			gridContainer.appendChild(grids).className = "gridItems"
 		}
-		
+		let gridVar = document.getElementsByClassName("gridItems");
+
+		for (let i = 0; i < gridVar.length; i++){
+			gridVar[i].addEventListener('mouseover', hoverFunction, false);
+		}
+
 	}
 
 let hoverFunction =	function(){
 				this.setAttribute("style" , "background-color: black;");
 	}
 
-makeGrids(80,80);
+	function deleteGrids(){
+		let deletedGrids = document.getElementsByClassName("gridItems");
 
-let gridVar = document.getElementsByClassName("gridItems")
+		while(deletedGrids[0]){
+			deletedGrids[0].parentNode.removeChild(deletedGrids[0]);
+		}
+		
+	}
 
-for (let i = 0; i < gridVar.length; i++){
-	gridVar[i].addEventListener('mouseover', hoverFunction, false);
+	function twoCalls(a){
+		deleteGrids();
+		makeGrids(a,a);
 }
+
+makeGrids(50,50);
+
+const clearButton = document.querySelector('#clearBtn');
+
+clearButton.addEventListener('click', (event) => {
+	
+	let gridVar = document.getElementsByClassName("gridItems");
+	
+	for (let i = 0; i < gridVar.length; i++){
+		gridVar[i].setAttribute("style", "background-color: white;");
+	}
+
+});
 
 
 
