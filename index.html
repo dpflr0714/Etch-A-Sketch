@@ -1,9 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Welcome to Etch-a-Sketch</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
+<title>Etch-a-Sketch</title>
 <style>
+	h1{
+		margin-top: 20px;
+		margin-bottom: 1px;
+	}
+	h3{
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	body {
+		background-image: radial-gradient(#ccf5ff, #a3a3c2);
+	}
+
+	.button{
+		background-color: #d9c4f5;
+		border: none;
+		font-size: 16px;
+		padding: 4px;
+		text-align: center;
+		cursor: pointer;
+		transition: all 0.5s;
+		border-radius: 5px;
+		outline: none;
+	}
+	.font{
+		font-family: 'Potta One' , cursive;
+	}
 	.center {
 		display: flex;
 		justify-content: center;
@@ -17,19 +45,15 @@
   		grid-template-rows: repeat(var(--grid-cols), 1fr);
   		background-color: #99bbff;
   		padding: 10px;
-  		height: 700px;
-  		width: 40%;
+  		height: 600px;
+  		width: 35%;
 	}
 	.gridItems {
   		background-color: white;
-  		border: 1px solid rgba(240, 248, 255);
-		padding: 2px;
 	}
 	.gridItems:hover{
-		background: red;
-
+		background-color: black;
 	}
-
 	#clearBtn {
 		padding: 5px;
 		margin-top: 10px;
@@ -37,7 +61,7 @@
 
 	.slider{
 		-webkit-appearance: none;
-		width: 25%;
+		width: 300px;
 		height: 12px;
 		border-radius: 5px;
 		background: #d3d3d3;
@@ -46,11 +70,9 @@
 		-webkit-transition: .2s;
 		transition: opacity .2s;
 	}
-
 	.slider:hover {
 		opacity: 1;
 	}
-
 	.slider::-webkit-slider-thumb {
 	  -webkit-appearance: none;
 	  appearance: none;
@@ -61,22 +83,28 @@
 	  cursor: pointer;
 	}
 
-
 </style>
 </head>
 
 <body>
-<div>
-	<input type="range" class ="slider" id ="rangeInput" min="1" max="100" value="50" oninput="amount.value=rangeInput.value" onchange="twoCalls(this.value)">
-	<output id="amount" for="rangeInput">50</output>
-</div>
-<div class="center">
-<h1>Etch a sketch bruh</h1>
+<div class="center font" >
+<h1>Etch-a-sketch</h1>
+	<h3>
+		<button id="randomRGB" class="button font">Rainbow</button>
+		<input type="color" id="colorInput" value ="#000000" onchange="newColor(this.value)">
+	</h3>
+
+	<h3>
+		<input type="range" class ="slider" id ="rangeInput" min="1" max="100" value="50" onchange="twoCalls(this.value)">
+	</h3>
+
 	<div id="gridContainer" class="gridContainers">
 	</div>
+	
 	<div>
-	<button id="clearBtn">Clear</button>
+		<button id="clearBtn" class="button font">Clear</button>
 	</div>
+
 </div>
 </body>
 
@@ -84,13 +112,7 @@
 
 
 <script type="text/javascript">
-/*	
-	const gridContainer = document.querySelector("#gridContainer");
-	for(let i = 0; i < 64; i++ ) {
-		const gridItems = document.createElement('gridItems');
-		gridItems.classList.add("gridItems")
-		gridContainer.appendChild(gridItems);
-} */
+
 	const gridContainer = document.getElementById("gridContainer");
 
 	function makeGrids(rows, cols){
@@ -103,13 +125,25 @@
 		let gridVar = document.getElementsByClassName("gridItems");
 
 		for (let i = 0; i < gridVar.length; i++){
-			gridVar[i].addEventListener('mouseover', hoverFunction, false);
+			gridVar[i].addEventListener('mouseenter', function(event){
+				event.target.style.backgroundColor = "black";}, false);
 		}
+	}
+/* Future feature
+	let cells = gridVar
+	function clickToggle(){
+
+		gridVar.classList.toggle("gridItems");
 
 	}
+*/
 
-let hoverFunction =	function(){
-				this.setAttribute("style" , "background-color: black;");
+
+
+	function hoverFunction(e) {
+		e.target.style.backgroundColor = "red";
+		//this.setAttribute("style" , "background-color: " + "red" + ";" );
+
 	}
 
 	function deleteGrids(){
@@ -120,6 +154,60 @@ let hoverFunction =	function(){
 		}
 		
 	}
+
+	function colorSetter(e){
+		document.getElementById("colorInput").value = e;
+
+	  	return document.getElementById("colorInput").value.toString();
+	}
+
+	function newColor(colorValue){
+
+	  	let gridVar = document.getElementsByClassName("gridItems");
+
+		for (let i = 0; i < gridVar.length; i++){
+			gridVar[i].addEventListener('mouseenter', function(event){
+				event.target.style.backgroundColor = colorSetter(colorValue);}, false);
+		}
+	}
+
+	function randomColor(){
+
+		let gridVar = document.getElementsByClassName("gridItems");
+
+		for (let i = 0; i < gridVar.length; i++){
+			gridVar[i].addEventListener('mouseenter', function(event){
+				event.target.style.backgroundColor = colorGenerator();}, false);
+		}
+	}
+
+	function colorGenerator(){
+		let rColor = Math.floor(Math.random()*16777215).toString(16);
+		return "#" + rColor
+	}
+/*  Future feature
+	function grayScale(){
+
+		let gridVar = document.getElementsByClassName("gridItems");
+
+		for (let i = 0; i < gridVar.length; i++){
+			gridVar[i].addEventListener('mouseenter', function(event){
+				event.target.style.backgroundColor = grayIncrement();}, false);
+		}
+
+	}
+
+	function grayIncrement(){
+		rgb(value,value,value)
+		if (value !== 0){
+			value -= 25;
+		} else {
+			return 0;
+		}
+
+		return rgbvalue
+	}
+*/
 
 	function twoCalls(a){
 		deleteGrids();
@@ -140,6 +228,13 @@ clearButton.addEventListener('click', (event) => {
 
 });
 
+const rgbButton = document.querySelector('#randomRGB');
 
+rgbButton.addEventListener('click', (event) => {
+
+	randomColor();
+
+});
 
 </script>
+
