@@ -1,9 +1,11 @@
-#Etch-a-sketch
+# Etch-a-sketch
+https://github.com/dpflr0714/Etch-A-Sketch
+
 Project created using HTML, CSS, and Javascript as part of the Odin Project
 
-Live Page
+[Live Page](https://dpflr0714.dpflr0714.github.io/Etch-A-Sketch/)
 
-##What I learned:
+## What I learned:
 - DOM manipulation
   -Using DOM manipulation to append and delete new div to in order to make new grids for sketching
 - Anonymous functions
@@ -14,7 +16,7 @@ Live Page
 - Constructor functions
   -Unknowingly used constructor function without realizing what it did. Had to google what it exactly did.
 
-##Problems I faced during the project:
+## Problems I faced during the project:
 - Not knowing the difference between constructor functions and regular functions and proper usage of "this" syntax. Had to figure
 out that "this" is not a variable.
 - Syntax errors that took way longer than it should have to solve.
