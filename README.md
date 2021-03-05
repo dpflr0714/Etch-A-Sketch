@@ -3,7 +3,7 @@ https://github.com/dpflr0714/Etch-A-Sketch
 
 Project created using HTML, CSS, and Javascript as part of the Odin Project
 
-[Live Page](https://dpflr0714.dpflr0714.github.io/Etch-A-Sketch/)
+[Live Page](https://dpflr0714.github.io/Etch-A-Sketch/)
 
 ### Functionality
 - Dragging the slider will either decrease or increase the number of grids being created
